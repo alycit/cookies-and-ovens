@@ -16,8 +16,7 @@ var OvenView = {
     });
 
     // listens to cookie
-    $.Topic("Cookie:bake").subscribe(function(cookie) {
-      console.log("updateCookieState()");
+    $.Topic("Cookie:baking").subscribe(function(cookie) {
       that.updateCookieState(cookie);
     });
 

@@ -1,35 +1,24 @@
 var Cookie = function(bakeTime, cookieType) {
-  // private members
-  var _timeBaked = 0,
-      _bakeTime  = 1,
-      _cookieType,
-      _id;
-
-  var initialize = function(bakeTime, cookieType) {
-    _id = new Date().getTime();
-    _cookieType = cookieType;
-    _bakeTime   = parseInt(bakeTime);
+  this.attributes = {
+    timeBaked:  0,
+    bakeTime:   parseInt(bakeTime),
+    cookieType: cookieType,
+    id:         new Date().getTime()
   }
+}
 
-  this.bake = function() {
-    _timeBaked = _timeBaked + 1;
-    $.Topic("Cookie:bake").publish(this);
-  }
-
-  this.getCookieType = function() {
-    return _cookieType;
-  }
-
-  this.getId = function() {
-    return _id;
-  }
-
-  this.getTimeBaked = function() {
-    return _timeBaked;
-  }
-
-  this.getState = function() {
-    percentCompleted = _timeBaked/_bakeTime;
+Cookie.prototype = {
+  getId: function() {
+    return this.attributes.id;
+  },
+  getCookieType: function() {
+    return this.attributes.cookieType;
+  },
+  getTimeBaked: function() {
+    return this.attributes.timeBaked;
+  },
+  getState: function() {
+    percentCompleted = this.attributes.timeBaked/this.attributes.bakeTime;
 
     if (percentCompleted > 1) {
       return "crispy";
@@ -40,7 +29,9 @@ var Cookie = function(bakeTime, cookieType) {
     } else {
       return "raw";
     }
+  },
+  bake: function() {
+    this.attributes.timeBaked = this.attributes.timeBaked + 1;
+    $.Topic("Cookie:baking").publish(this);
   }
-
-  initialize(bakeTime, cookieType);
 }

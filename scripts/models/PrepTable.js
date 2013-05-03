@@ -1,28 +1,27 @@
 var PrepTable = function() {
-  var _cookies = [];
+  this.attributes = {
+    cookies: []
+  }
+}
 
-  var initialize = function() { }
-
-  this.addCookie = function(cookie) {
-    _cookies.push(cookie);
+PrepTable.prototype = {
+  addCookie: function(cookie) {
+    this.attributes.cookies.push(cookie);
     $.Topic("PrepTable:addCookieToPrepTable").publish(cookie);
-  }
-
-  this.moveCookieToOven = function(id) {
-    var cookie = findCookie(id);
-    removeCookie(cookie);
+  },
+  moveCookieToOven: function(id) {
+    var cookie = this.findCookie(id);
+    this.removeCookie(cookie);
     $.Topic("PrepTable:moveCookieToOven").publish(cookie);
-  }
-
-  var removeCookie = function(cookie) {
-    var index = _cookies.indexOf(cookie);
-    _cookies.splice(index, 1);
+  },
+  removeCookie: function(cookie) {
+    var index = this.attributes.cookies.indexOf(cookie);
+    this.attributes.cookies.splice(index, 1);
     $.Topic("PrepTable:removeCookieFromPrepTable").publish(cookie);
-  }
-
-  var findCookie = function(id) {
+  },
+  findCookie: function(id) {
     var result = null;
-    $(_cookies).each(function(i, cookie) {
+    $(this.attributes.cookies).each(function(i, cookie) {
       if (cookie.getId() == id) {
         result = cookie;
         return false;
@@ -31,6 +30,4 @@ var PrepTable = function() {
 
     return result;
   }
-
-  initialize();
 }
