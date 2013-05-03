@@ -9,7 +9,7 @@ var OvenView = {
     });
 
     // listens to PrepTable
-    $.Topic("PrepTable:moveCookieToOven").subscribe(function(cookie) {
+    $.Topic("PrepTable:movingCookieToOven").subscribe(function(cookie) {
       oven.addCookie(cookie);
       that.renderCookie(cookie);
       alert("Cookies in the oven!");
@@ -19,7 +19,6 @@ var OvenView = {
     $.Topic("Cookie:baking").subscribe(function(cookie) {
       that.updateCookieState(cookie);
     });
-
   },
   bakeButton: "#bake",
   cookieTemplate: '<div><span class="cookie-type"></span> [<span class="cookie-state"></span>]</div>',

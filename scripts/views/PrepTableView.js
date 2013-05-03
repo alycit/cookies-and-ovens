@@ -22,12 +22,12 @@ var PrepTableView = {
     });
 
     // listens to PrepTable
-    $.Topic("PrepTable:addCookieToPrepTable").subscribe(function(cookie) {
+    $.Topic("PrepTable:addingCookieToPrepTable").subscribe(function(cookie) {
       that.renderCookie(cookie);
     });
 
     // listens to PrepTable
-    $.Topic("PrepTable:removeCookieFromPrepTable").subscribe(function(cookie) {
+    $.Topic("PrepTable:removingCookieFromPrepTable").subscribe(function(cookie) {
       that.removeCookie(cookie);
     });
   },
