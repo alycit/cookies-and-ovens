@@ -45,10 +45,7 @@ var OvenView = {
     });
   },
   updateCookieState: function(cookie) {
-    console.log(cookie.getId());
-    console.log(cookie.getState());
-    console.log(cookie.getTimeBaked());
-
+    // load cookie div
     var $div = $("#oven").find("[data-id='" + cookie.getId() + "']");
 
     // update cookie state text
