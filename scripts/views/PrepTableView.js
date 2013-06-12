@@ -11,23 +11,23 @@ var PrepTableView = {
           cookieType = $(that.cookieTypeSelector).val();
 
       var cookie = new Cookie(bakeTime, cookieType);
-      prepTable.addCookie(cookie);
+      prepTable.addItem(cookie);
 
       $(that.cookieTypeSelector+","+that.bakeTimeSelector).val('');
     });
 
     $(this.listSelector).on("click", ".add", function(e) {
       var id = $(this).parent().attr("data-id");
-      cookie = prepTable.moveCookieToOven(id);
+      cookie = prepTable.moveItemToOven(id);
     });
 
     // listens to PrepTable
-    $.Topic("PrepTable:addingCookieToPrepTable").subscribe(function(cookie) {
+    $.Topic("PrepTable:addingItemToPrepTable").subscribe(function(cookie) {
       that.renderCookie(cookie);
     });
 
     // listens to PrepTable
-    $.Topic("PrepTable:removingCookieFromPrepTable").subscribe(function(cookie) {
+    $.Topic("PrepTable:removingItemFromPrepTable").subscribe(function(cookie) {
       that.removeCookie(cookie);
     });
   },

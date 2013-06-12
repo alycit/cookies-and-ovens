@@ -1,29 +1,29 @@
 var PrepTable = function() {
   this.attributes = {
-    cookies: []
+    items: []
   }
 }
 
 PrepTable.prototype = {
-  addCookie: function(cookie) {
-    this.attributes.cookies.push(cookie);
-    $.Topic("PrepTable:addingCookieToPrepTable").publish(cookie);
+  addItem: function(item) {
+    this.attributes.items.push(item);
+    $.Topic("PrepTable:addingItemToPrepTable").publish(item);
   },
-  moveCookieToOven: function(id) {
-    var cookie = this.findCookie(id);
-    this.removeCookie(cookie);
-    $.Topic("PrepTable:movingCookieToOven").publish(cookie);
+  moveItemToOven: function(id) {
+    var item = this.findItem(id);
+    this.removeItem(item);
+    $.Topic("PrepTable:movingItemToOven").publish(item);
   },
-  removeCookie: function(cookie) {
-    var index = this.attributes.cookies.indexOf(cookie);
-    this.attributes.cookies.splice(index, 1);
-    $.Topic("PrepTable:removingCookieFromPrepTable").publish(cookie);
+  removeItem: function(item) {
+    var index = this.attributes.items.indexOf(item);
+    this.attributes.items.splice(index, 1);
+    $.Topic("PrepTable:removingItemFromPrepTable").publish(item);
   },
-  findCookie: function(id) {
+  findItem: function(id) {
     var result = null;
-    $(this.attributes.cookies).each(function(i, cookie) {
-      if (cookie.getId() == id) {
-        result = cookie;
+    $(this.attributes.items).each(function(i, item) {
+      if (item.getId() == id) {
+        result = item;
         return false;
       }
     });

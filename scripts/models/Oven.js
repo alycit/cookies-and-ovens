@@ -1,16 +1,16 @@
 var Oven = function() {
   this.attributes = {
-    cookies: []
+    items: []
   }
 }
 
 Oven.prototype = {
-  addCookie: function(cookie) {
-    this.attributes.cookies.push(cookie);
+  addItem: function(item) {
+    this.attributes.items.push(item);
   },
   bake: function() {
-    $(this.attributes.cookies).each(function(i, cookie) {
-      cookie.bake();
+    $(this.attributes.items).each(function(i, item) {
+      item.bake();
     });
   }
 }
