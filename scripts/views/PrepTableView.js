@@ -18,16 +18,16 @@ var PrepTableView = {
 
     $(this.listSelector).on("click", ".add", function(e) {
       var id = $(this).parent().attr("data-id");
-      cookie = prepTable.moveItemToOven(id);
+      cookie = prepTable.moveItem(id);
     });
 
     // listens to PrepTable
-    $.Topic("PrepTable:addingItemToPrepTable").subscribe(function(cookie) {
+    $.Topic("PrepTable:addingItem").subscribe(function(cookie) {
       that.renderCookie(cookie);
     });
 
     // listens to PrepTable
-    $.Topic("PrepTable:removingItemFromPrepTable").subscribe(function(cookie) {
+    $.Topic("PrepTable:removingItem").subscribe(function(cookie) {
       that.removeCookie(cookie);
     });
   },

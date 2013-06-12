@@ -9,7 +9,7 @@ var OvenView = {
     });
 
     // listens to PrepTable
-    $.Topic("PrepTable:movingItemToOven").subscribe(function(cookie) {
+    $.Topic("PrepTable:movingItem").subscribe(function(cookie) {
       oven.addItem(cookie);
       that.renderCookie(cookie);
       alert("Cookies in the oven!");
