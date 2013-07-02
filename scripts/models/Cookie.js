@@ -1,4 +1,12 @@
 var Cookie = function(bakeTime, cookieType) {
+  if(bakeTime === undefined || cookieType === undefined) {
+    throw new Error("Invalid number of args");
+  }
+
+  if(isNaN(parseInt(bakeTime))) {
+    throw new Error("bakeTime must be numeric");
+  }
+
   this.attributes = {
     timeBaked:  0,
     bakeTime:   parseInt(bakeTime),
@@ -8,6 +16,7 @@ var Cookie = function(bakeTime, cookieType) {
 }
 
 Cookie.prototype = {
+  constructor: Cookie,
   getId: function() {
     return this.attributes.id;
   },
@@ -32,6 +41,7 @@ Cookie.prototype = {
   },
   bake: function() {
     this.attributes.timeBaked = this.attributes.timeBaked + 1;
+    // AJAX request
     $.Topic("Cookie:baking").publish(this);
   }
 }
