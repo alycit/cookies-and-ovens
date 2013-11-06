@@ -1,22 +1,25 @@
 var Oven = function() {
-  this.attributes = {
-    items: []
+  var items = [];
+  
+  this.getItems = function() {
+    return items;
   }
 }
 
 Oven.prototype = {
   addItem: function(item) {
-    this.attributes.items.push(item)
+    this.getItems().push(item);
   },
   bake: function() {
-    $(this.attributes.items).each(function(i, item) {
-      item.bake()
+    $(this.getItems()).each(function(i, item) {
+      item.bake();
     })
   },
   // see iterator pattern: https://github.com/abinoda/design-patterns/blob/master/iterator_pattern.md
   each: function(callback) {
-    for (i = 0; i < this.attributes.items.length; i++) {
-      var item = this.attributes.items[i]
+    var items = this.getItems();
+    for (i = 0; i < items.length; i++) {
+      var item = items[i]
       callback(item)
     }
   }

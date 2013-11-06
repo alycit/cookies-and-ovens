@@ -1,28 +1,30 @@
 var PrepTable = function() {
-  this.attributes = {
-    items: []
+  var items = [];
+  
+  this.getItems = function() {
+    return items;
   }
 }
 
 PrepTable.prototype = {
   addItem: function(item) {
-    this.attributes.items.push(item)
+    this.getItems().push(item)
   },
   removeItem: function(id) {
-    var item = this.findItem(id)
-    var index = this.attributes.items.indexOf(item)
-    this.attributes.items.splice(index, 1)
-    return item
+    var item = this.findItem(id);
+    var index = this.getItems().indexOf(item);
+    this.getItems().splice(index, 1);
+    return item;
   },
   findItem: function(id) {
     var result = null
-    $(this.attributes.items).each(function(i, item) {
+    $(this.getItems()).each(function(i, item) {
       if (item.getId() == id) {
-        result = item
-        return false
+        result = item;
+        return false;
       }
     })
 
-    return result
+    return result;
   }
 }
